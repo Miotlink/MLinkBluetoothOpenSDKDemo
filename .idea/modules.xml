@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MLinkBluetoothOpenSDKDemo.iml" filepath="$PROJECT_DIR$/.idea/modules/MLinkBluetoothOpenSDKDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MIotBluetoothOpenSDK/MLinkBluetoothOpenSDKDemo.MIotBluetoothOpenSDK.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MLinkBluetoothOpenSDKDemo.app.main.iml" />

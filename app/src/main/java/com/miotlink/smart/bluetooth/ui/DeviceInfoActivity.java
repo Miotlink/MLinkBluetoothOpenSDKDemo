@@ -113,12 +113,7 @@ public class DeviceInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.ble_state_tv:
 
                 break;
-            case R.id.rz_ble_btn:
-                bundle.putParcelable("device",bleModelDevice);
-                bundle.putString("macCode",bleModelDevice.getMacAddress());
-                bundle.putInt("configType",1);
-                DeviceSmartConfigActivity.startIntent(mContext,bundle);
-                break;
+
         }
     }
 }

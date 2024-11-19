@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miotlink.MLinkSmartBluetoothSDK;
+import com.miotlink.bluetooth.listener.SmartNotifyBindPuListener;
 import com.miotlink.bluetooth.listener.SmartNotifyDeviceConnectListener;
 import com.miotlink.bluetooth.listener.SmartNotifyUartDataListener;
 import com.miotlink.bluetooth.model.BleModelDevice;
+import com.miotlink.bluetooth.utils.HexUtil;
 import com.miotlink.smart.bluetooth.R;
 import com.miotlink.smart.bluetooth.base.BaseActivity;
 import com.miotlink.smart.bluetooth.view.LoadingViewDialog;
@@ -69,6 +71,7 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
         clean_data.setOnClickListener(this);
         get_wifiinfo_btn.setOnClickListener(this);
         ota_btn.setOnClickListener(this);
+        ble_state_tv.setOnClickListener(this);
     }
 
     @Override
@@ -90,7 +93,6 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
             MLinkSmartBluetoothSDK.getInstance().connect(bleModelDevice.getMacAddress(), this);
             MLinkSmartBluetoothSDK.getInstance().setSmartNotifyUartDataListener(this);
         }
-//        new Handler().postDelayed(() -> loadingViewDialog.show(), 500);
 
     }
 
@@ -110,10 +112,13 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
                 String s = send_ble_hex_et.getText().toString();
                 MLinkSmartBluetoothSDK.getInstance().send(bleModelDevice.getMacAddress(), s.getBytes(), this);
                 break;
-            case R.id.ota_btn:
-                break;
             case R.id.get_wifiinfo_btn:
-                MLinkSmartBluetoothSDK.getInstance().bindPu(bleModelDevice.getMacAddress());
+
+                MLinkSmartBluetoothSDK.getInstance().bindPu(bleModelDevice.getMacAddress(), (macCode, errorCode, errorMessage) -> {
+                    if (errorCode == 0x0f) {
+                        runOnUiThread(() -> Toast.makeText(mContext, "设备已绑定", Toast.LENGTH_SHORT).show());
+                    }
+                });
                 break;
             case R.id.product_test_btn:
                 MLinkSmartBluetoothSDK.getInstance().getVersion(bleModelDevice.getMacAddress());
@@ -123,6 +128,13 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
                 uartdata = "";
                 receiver_ble_hex.setText(uartdata);
                 break;
+            case R.id.ble_state_tv:
+                if (MLinkSmartBluetoothSDK.getInstance().isConnect(macCode)) {
+                    MLinkSmartBluetoothSDK.getInstance().disConnect(macCode);
+                } else {
+                    MLinkSmartBluetoothSDK.getInstance().connect(macCode, this);
+                }
+                break;
         }
     }
 
@@ -130,34 +142,11 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onSmartNotifyConnectListener(int errorCode, String errorMessage, String macCode) {
         runOnUiThread(() -> {
-            if (errorCode == 2) {
-//                if (loadingViewDialog.isShow()) {
-//                    loadingViewDialog.cancel();
-//                }
-                isconnect = true;
-                ble_state_tv.setText("断开");
-            } else {
-//                if (!loadingViewDialog.isShow()) {
-//                    loadingViewDialog.show();
-//                }
-                isconnect = false;
-                ble_state_tv.setText("连接");
-            }
+
+            ble_state_tv.setText(errorCode == 2 ? "断开" : "连接");
         });
     }
 
-    @Override
-    public void onSmartNotifyUartDataListener(String macCode, String command) throws Exception {
-        uartdata += simpleDateFormat.format(new Date()) + ":" + command + "\n";
-        runOnUiThread(() -> receiver_ble_hex.setText(uartdata));
-    }
-
-    @Override
-    public void onSmartNotifyBindListener(String macCode, int errorCode, String errorMessage) {
-        if (errorCode == 0x0f) {
-            runOnUiThread(() -> Toast.makeText(mContext, "设备已绑定", Toast.LENGTH_SHORT).show());
-        }
-    }
 
     @Override
     public void onSmartNotifyDeviceVersionListener(String macCode, int version) {
@@ -165,7 +154,10 @@ public class DeviceControlActivity extends BaseActivity implements View.OnClickL
     }
 
     @Override
-    public void onNotifyUartData(String macCode, int errorCode, String errorMessage) {
-
+    public void onNotifyUartDataListener(String macCode, int errorCode, String errorMessage, String command) {
+        uartdata += simpleDateFormat.format(new Date()) + ":" + command + "\n";
+        runOnUiThread(() -> receiver_ble_hex.setText(uartdata));
     }
+
+
 }
