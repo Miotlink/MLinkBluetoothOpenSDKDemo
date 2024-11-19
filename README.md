@@ -1,22 +1,6 @@
 妙联蓝牙配网Android SDK使用说明文档
 (Build 2024-11-19)
 
-
-
-
- 编 写 人：ml_qiaozhuang
-                             编写时间：2024-11-19
-                             审 核 人：ml_szf
-    审核时间：2024-11-19
-修订页
-编号	章节名称	修订内容简述	修订日期	修订后
-版本号	修订人
-1	全部	编写首次版本	2021-03	V1.0.0	
-2			2021-03	V1.1.1	qiao
-
-
-
-
 1.说明
  1.1 本文档用于说明妙联蓝牙WIFI配网SDK Android版本接口之间的关系以及接口调用顺序，对蓝牙WIFI 配网SDK Android版本各接口都有详细的说明。
 2.名词解释
@@ -171,28 +155,14 @@ SmartNotifyUartDataListener smartNotifyUartDataListener=new SmartNotifyUartDataL
         
     }
 
-    @Override
-    public void onSmartNotifyBindListener(String macCode, int errorCode, String errorMessage) {
 
-    }
-
-    @Override
-    public void onSmartNotifyDeviceVersionListener(String macCode, int version) {
-
-    }
-
-    @Override
-    public void onNotifyUartData(String macCode, int errorCode, String errorMessage) {
-
-    }
+   
 }
 
 
 4.6.8销毁
 App应用销毁调用该方法
-
 MiotSmartBluetoothSDK.getInstance().onDestory();
-
 
 4.7错误码
 15	绑定设备成功
