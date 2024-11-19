@@ -1,0 +1,8 @@
+# Project exclude paths
+/.gradle/
+# Project exclude paths
+/app/build/
+/app/build/intermediates/javac/debug/classes/
+# Project exclude paths
+/MIotBluetoothOpenSDK/build/
+/MIotBluetoothOpenSDK/build/intermediates/javac/debug/classes/
